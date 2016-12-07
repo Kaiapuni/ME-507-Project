@@ -232,3 +232,13 @@ def magx100(imu):
         magsingle(imu)
         out = magx(imu)
         print(out)
+        
+def heading(imu):
+    """ This function returns a list of the components of magnetometer reading. """
+    
+    out = []
+    magsingle(imu)
+    out.append(magx(imu))
+    out.append(magy(imu))
+    out.append(magz(imu))
+    return out
