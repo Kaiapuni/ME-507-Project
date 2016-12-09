@@ -1,13 +1,13 @@
 # Neopixel Colors
 
 """RGB values for different colors"""
-RED         = (1, 0, 0)
+RED         = (2, 0, 0)
 ORANGE      = (2, 1, 0)
-YELLOW      = (1, 1, 0)
-GREEN       = (0, 1, 0)
-LIGHTBLUE   = (0, 1, 1)
-BLUE        = (0, 0, 1)
-PURPLE      = (1, 0, 1)
+YELLOW      = (2, 2, 0)
+GREEN       = (0, 2, 0)
+LIGHTBLUE   = (0, 2, 2)
+BLUE        = (0, 0, 2)
+PURPLE      = (2, 0, 2)
 PINK        = (2, 0, 1)
 
 # Direction Color Choice
