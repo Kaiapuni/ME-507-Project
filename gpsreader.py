@@ -11,11 +11,10 @@ def checksum(packet):
     i = 0
     check = 0
     while i < len(packet):
-        if packet[i] != '$' and packet[i] != ',' and packet[i] != '*':
+        if packet[i] != '$' and packet[i] != '*':
             check = check ^ ord(packet[i])
-            print(check)
         if packet[i] == '*':
-            return check
+            break
         i += 1
     return check
     
@@ -27,7 +26,7 @@ def readsum(packet):
     star = False
     while i < len(packet):
         if star == True:
-            if packet[i] != '<':
+            if packet[i] != '\\':
                 check += packet[i]
             else:
                 break
@@ -37,3 +36,14 @@ def readsum(packet):
     high = int('0x' + packet[i-2])
     low = int('0x' + packet[i-1])
     return high<<4 | low
+    
+def parse(packet):
+    """ This function returns a list containing the separated components of a packet. """
+    
+    out = packet.split(',') # To start, break a packet up at the commas
+    out[len(out)-1] = out[len(out)-1].split('\r')[0] # Remove everything past the checksum from the last index
+    out.append(out[len(out)-1].split('*')[1]) # Attach an index containing the checksum
+    out[len(out)-2] = out[len(out)-2].split('*')[0] # Replace the second-to-last index with the last piece of data before the checksum
+    return out
+    
+    
