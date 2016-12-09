@@ -21,5 +21,5 @@ def aleds(components):
     """ This function calculates backup LED values based on accelerometer data. """
     
     fraction = [x/32768 for x in components]
-    scaled = [int(255*x) for x in fraction]
+    scaled = [abs(int(255*x)) for x in fraction]
     return scaled

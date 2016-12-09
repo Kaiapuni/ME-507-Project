@@ -20,3 +20,13 @@ def gpstopixels(gps, parser, neopixels, num_leds):
     rgb = lights.merge(course, speed)
     rgb_data = [rgb]*num_leds
     neopixels.show(rgb_data)
+    
+def fastgpstopixels(gps, parser, neopixels, num_leds):
+    """ This function should call all the requisite functions to update the neopixels without the RMC buffer dump. """
+    
+    gpsreader.quickerupdate(gps, parser)
+    course = parser.course
+    speed = parser.speed[2]
+    rgb = lights.merge(course, speed)
+    rgb_data = [rgb]*num_leds
+    neopixels.show(rgb_data)

@@ -79,3 +79,8 @@ def quickupdate(gps, parser):
     """ This function runs RMC and nmeaupdate together. """
     
     nmeaupdate(parser, RMC(gps))
+    
+def quickerupdate(gps, parser):
+    """ This function runs RMC and nmeaupdate together. """
+    
+    nmeaupdate(parser, fastRMC(gps))

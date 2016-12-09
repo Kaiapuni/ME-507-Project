@@ -21,5 +21,19 @@ def tenthousand():
     for run in range(0, 10000):
         ME_507_Project.gpstopixels(gps, parser, LED_strip, num_leds)
 
+def compensate():
+    """ This function should allow IMU response when GPS data is unavailable. """
+    
+    GPRMC = gpsreader.parse(gpsreader.RMC(gps))
+    while GPRMC[2] == 'A':
+        GPRMC = gpsreader.parse(gpsreader.fastRMC(gps))
+        ME_507_Project.fastgpstopixels(gps, parser, LED_strip, num_leds)
+    for x in range(0, 100):
+        components = imureader.acceleration(imu)
+        rgb_data = [(imumath.aleds(components))]*num_leds
+        LED_strip.show(rgb_data)
+    
+for y in range(0, 100):
+    compensate()
 #for run in range(0, 100):
 #    ME_507_Project.gpstopixels(gps, parser, LED_strip, num_leds)
