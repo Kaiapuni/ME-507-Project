@@ -26,7 +26,7 @@ def readsum(packet):
     star = False
     while i < len(packet):
         if star == True:
-            if packet[i] != '\\':
+            if packet[i] != '\r':
                 check += packet[i]
             else:
                 break
@@ -46,4 +46,14 @@ def parse(packet):
     out[len(out)-2] = out[len(out)-2].split('*')[0] # Replace the second-to-last index with the last piece of data before the checksum
     return out
     
+def RMC(gps):
+    """ This function searches for and returns a GPRMC sentence from the gps. """
     
+    i = 0
+    garbage = gps.read(gps.any()) # This line cleans out the buffer so that the function only reads recent data
+    while i < 25:
+        temp = gps.readline().decode('utf-8')
+        if temp.split(',')[0] == '$GPRMC':
+            return temp
+        i += 1
+    return 'fail'
