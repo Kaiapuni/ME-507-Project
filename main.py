@@ -9,3 +9,17 @@ rgb_data = [(1, 0, 0)]*num_leds
 LED_strip.show(rgb_data)
 gps = pyb.UART(6, 9600, timeout=1000)
 parser = MicropyGPS()
+
+def once():
+    ME_507_Project.gpstopixels(gps, parser, LED_strip, num_leds)
+    
+def thousand():
+    for run in range(0, 1000):
+        ME_507_Project.gpstopixels(gps, parser, LED_strip, num_leds)
+        
+def tenthousand():
+    for run in range(0, 10000):
+        ME_507_Project.gpstopixels(gps, parser, LED_strip, num_leds)
+
+#for run in range(0, 100):
+#    ME_507_Project.gpstopixels(gps, parser, LED_strip, num_leds)

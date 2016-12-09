@@ -8,13 +8,15 @@ Created on Mon Nov 14 12:37:05 2016
     # 0x19 = 25 = 0b0011001 = the address of the accelerometer
     # 0x1E = 30 = 0b0011110 = the address of the magnetometer
     # 0x6B = 107 = 0b110101 = the address of the gyroscope
-
-import pyb
-import math
-from ws2812 import WS2812
-import time
-import machine
-
-LED_strip = WS2812(spi_bus = 2, led_count = 29)
-rgb_data = [(0, 0, 0)]*29
-gps = pyb.UART(6, 9600)
+import gpsreader
+import lights
+    
+def gpstopixels(gps, parser, neopixels, num_leds):
+    """ This function should call all the requisite functions to update the neopixels. """
+    
+    gpsreader.quickupdate(gps, parser)
+    course = parser.course
+    speed = parser.speed[2]
+    rgb = lights.merge(course, speed)
+    rgb_data = [rgb]*num_leds
+    neopixels.show(rgb_data)

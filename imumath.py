@@ -12,8 +12,14 @@ def amagnitude(components):
     
     return int(math.sqrt(components[0]**2 + components[1]**2 + components[2]**2))
     
-def asample(imu, timer):
-    """ This function should take multiple readings of acceleration and average them out. """
+#def asample(imu, timer):
+#    """ This function should take multiple readings of acceleration and average them out. """
+#    
+#    timer.init(freq=400)
     
-    timer.init(freq=400)
+def aleds(components):
+    """ This function calculates backup LED values based on accelerometer data. """
     
+    fraction = [x/32768 for x in components]
+    scaled = [int(255*x) for x in fraction]
+    return scaled

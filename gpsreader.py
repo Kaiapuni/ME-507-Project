@@ -57,3 +57,25 @@ def RMC(gps):
             return temp
         i += 1
     return 'fail'
+    
+def fastRMC(gps):
+    """ Identical to RMC, but without the buffer dump. """
+    
+    i = 0
+    while i < 25:
+        temp = gps.readline().decode('utf-8')
+        if temp.split(',')[0] == '$GPRMC':
+            return temp
+        i += 1
+    return 'fail'
+    
+def nmeaupdate(parser, sentence):
+    """ This function updates the NMEA sentence parser. """
+    
+    for x in sentence:
+        parser.update(x)
+
+def quickupdate(gps, parser):
+    """ This function runs RMC and nmeaupdate together. """
+    
+    nmeaupdate(parser, RMC(gps))
