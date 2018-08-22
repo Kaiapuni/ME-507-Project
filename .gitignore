@@ -1,0 +1,5 @@
+# Project report
+*.pdf
+
+# Eagle files
+**/Eagle\ Files
